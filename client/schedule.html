@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <title>
+            Schedule
+        </title>
+        <script src="./schedule.js"></script>
+        <link rel="stylesheet" type="text/css" href="./global.css"></link>
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+    </head>
+    
+    <body>    
+        <div class="container pt-150">
+            <input type="text" id="postUrl" class="post-url"> 
+            <button id="postButton" class="btn-default post-button fright" onclick="Scheduler.postUrl()">Post</button>
+        </div>
+
+        <div class="container pt-50">
+            <!-- <i class="fa fa-twitter"></i>                  
+            <input type="checkbox" id="postOnTwitter">
+            Twitter -->
+
+            <i class="fa fa-facebook-f ml-30"></i>
+            <input type="checkbox" id="postOnFacebook">
+            Facebook
+
+            <span class="fright">Autoschedule</span>
+            <label class="switch fright mr-10">
+                <input type="checkbox" id="autoschedule">
+                <span class="slider round"></span>
+            </label>
+        </div>
+    </body>
+
+    <script>
+        window.onload = function(event) {
+            var fbLoginData = JSON.parse(sessionStorage.getItem('fbLoginPermissions'));
+
+            if(!fbLoginData)
+                window.location.href = window.location.origin
+        }
+    </script>
+</html>

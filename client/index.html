@@ -1,0 +1,76 @@
+<html>
+<head>
+<title>
+Login
+</title>
+<script src="./schedule.js"></script>
+<link rel="stylesheet" type="text/css" href="./global.css"></link>
+</head>
+
+<body>    
+    <fb:login-button class="center-element"
+        scope="public_profile,email,publish_actions"
+        onlogin="checkLoginState();">
+    </fb:login-button>
+
+    <button class="btn-default center-element" onclick="twitterLogin()">Twitter</button>
+
+    <button class="btn-default center-element" onclick="continueEventHandler()">Continue</button>
+</body>
+</html>
+
+<script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '813164498894176',
+        cookie     : true,
+        xfbml      : true,
+        version    : 'v2.12'
+      });
+        
+      FB.AppEvents.logPageView();   
+        
+    };
+  
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "https://connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+
+
+    function checkLoginState() {
+        FB.getLoginStatus(function(response) {
+            if(response.status == "connected") {
+                sessionStorage.setItem('fbLoginPermissions', JSON.stringify(response));
+                alert('Facebook account connected');
+            }
+        });
+    }
+
+    function continueEventHandler() {
+        var fbLoginData = JSON.parse(sessionStorage.getItem('fbLoginPermissions'));
+
+        if(fbLoginData) {
+            window.location.href = window.location.href + 'schedule.html';
+        }
+        else {
+            alert('You need to login with Facebook to continue');
+        }
+    }
+
+    function twitterLogin() {
+        var http = new XMLHttpRequest();
+        var url = "twitterLogin";
+
+        http.open("POST", url, true);
+
+        http.onreadystatechange = function() {
+            console.log('prodje');
+        }
+
+        http.send();
+    }
+</script>
